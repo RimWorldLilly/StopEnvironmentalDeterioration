@@ -12,7 +12,9 @@
 
   <PropertyGroup>
     <RimWorldManagedDir Condition="'$(RimWorldManagedDir)' == '' and '$(RIMWORLD_MANAGED)' != ''">$(RIMWORLD_MANAGED)</RimWorldManagedDir>
-    <RimWorldManagedDir Condition="'$(RimWorldManagedDir)' == ''">Y:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed</RimWorldManagedDir>
+    <RimWorldManagedDir Condition="'$(RimWorldManagedDir)' == ''">$(MSBuildProjectDirectory)\..\..\RimWorldWin64_Data\Managed</RimWorldManagedDir>
+    <HarmonyDllPath Condition="'$(HarmonyDllPath)' == '' and '$(HARMONY_DLL)' != ''">$(HARMONY_DLL)</HarmonyDllPath>
+    <HarmonyDllPath Condition="'$(HarmonyDllPath)' == ''">$(MSBuildProjectDirectory)\..\Harmony\Current\Assemblies\0Harmony.dll</HarmonyDllPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,12 +23,15 @@
       <Private>false</Private>
     </Reference>
     <Reference Include="0Harmony">
-      <HintPath>$(RimWorldManagedDir)\0Harmony.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>$(RimWorldManagedDir)\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>$(HarmonyDllPath)</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
+
+  <Target Name="ValidateRimWorldReferences" BeforeTargets="ResolveReferences">
+    <Error Condition="!Exists('$(RimWorldManagedDir)\Assembly-CSharp.dll')"
+           Text="Assembly-CSharp.dll not found. Set RIMWORLD_MANAGED to the RimWorld RimWorldWin64_Data\Managed directory. Current path: $(RimWorldManagedDir)" />
+    <Error Condition="!Exists('$(HarmonyDllPath)')"
+           Text="0Harmony.dll not found. Check Mods\Harmony\Current\Assemblies or set HARMONY_DLL. Current path: $(HarmonyDllPath)" />
+  </Target>
 </Project>
