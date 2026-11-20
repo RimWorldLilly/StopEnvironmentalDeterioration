@@ -10,11 +10,11 @@ It is intended to stop periodic deterioration caused by the environment. It does
 
 ## Build
 
-1. Install the .NET Framework 4.7.2 targeting pack and a .NET SDK.
+1. Install the .NET 10 SDK.
 2. Keep the RimWorld installation and Steam Workshop folder in the standard Steam layout.
 3. Run `build.bat` from this mod folder.
 
-The project follows the DLL reference layout used by [Lilly-Mod-Manager](https://github.com/lilly1987/Lilly-Mod-Manager):
+The project targets `net10.0` to match the RimWorld 1.7 Harmony assembly, which references `System.Runtime 10.0.0.0`. The DLL reference paths follow the layout used by [Lilly-Mod-Manager](https://github.com/lilly1987/Lilly-Mod-Manager):
 
 - Game root: two directory levels above this mod folder.
 - RimWorld assembly: `$(GameRoot)\Assembly-CSharp.dll`.
