@@ -1,5 +1,0 @@
-Y:\SteamLibrary\steamapps\common\RimWorld\Mods\StopEnvironmentalDeterioration\obj\Release\StopEnvironmentalDeterioration.csproj.AssemblyReference.cache
-Y:\SteamLibrary\steamapps\common\RimWorld\Mods\StopEnvironmentalDeterioration\obj\Release\StopEnvironmentalDeterioration.GeneratedMSBuildEditorConfig.editorconfig
-Y:\SteamLibrary\steamapps\common\RimWorld\Mods\StopEnvironmentalDeterioration\obj\Release\StopEnvironmentalDeterioration.AssemblyInfoInputs.cache
-Y:\SteamLibrary\steamapps\common\RimWorld\Mods\StopEnvironmentalDeterioration\obj\Release\StopEnvironmentalDeterioration.AssemblyInfo.cs
-Y:\SteamLibrary\steamapps\common\RimWorld\Mods\StopEnvironmentalDeterioration\obj\Release\StopEnvironmentalDeterioration.csproj.CoreCompileInputs.cache
