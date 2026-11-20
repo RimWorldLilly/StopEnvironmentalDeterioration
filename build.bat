@@ -1,13 +1,28 @@
 @echo off
 setlocal
-if "%RIMWORLD_MANAGED%"=="" set "RIMWORLD_MANAGED=Y:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed"
-dotnet build StopEnvironmentalDeterioration.csproj -c Release -p:RimWorldManagedDir="%RIMWORLD_MANAGED%"
-if errorlevel 1 (
-  echo.
-  echo Build failed. Check the RimWorld Managed directory and .NET Framework 4.7.2 targeting pack.
-  pause
-  exit /b 1
+
+rem Resolve the game Managed folder relative to this mod folder by default.
+if "%RIMWORLD_MANAGED%"=="" (
+    for %%I in ("%~dp0..\..\RimWorldWin64_Data\Managed") do set "RIMWORLD_MANAGED=%%~fI"
 )
+
+rem Harmony is a separate mod, not a RimWorld Managed assembly.
+if "%HARMONY_DLL%"=="" (
+    for %%I in ("%~dp0..\Harmony\Current\Assemblies\0Harmony.dll") do set "HARMONY_DLL=%%~fI"
+)
+
+echo RimWorld Managed: "%RIMWORLD_MANAGED%"
+echo Harmony DLL:     "%HARMONY_DLL%"
 echo.
-echo Build completed. Copy this mod folder into RimWorld\Mods if it is not already there.
+
+dotnet build "%~dp0StopEnvironmentalDeterioration.csproj" -c Release -p:RimWorldManagedDir="%RIMWORLD_MANAGED%" -p:HarmonyDllPath="%HARMONY_DLL%"
+if errorlevel 1 (
+    echo.
+    echo Build failed. Check the two paths printed above.
+    pause
+    exit /b 1
+)
+
+echo.
+echo Build completed. DLL: 1.7\Assemblies\StopEnvironmentalDeterioration.dll
 pause
