@@ -1,5 +1,3 @@
-using System;
-using System.Reflection;
 using HarmonyLib;
 using Verse;
 
@@ -33,13 +31,9 @@ namespace Lilly.StopEnvironmentalDeterioration
     }
 
     /// <summary>
-    /// RimWorld routes periodic environment-caused deterioration through
-    /// SteadyEnvironmentEffects.TryDoDeteriorate. Skipping the complete method
-    /// prevents that environmental deterioration pass from running at all.
-    /// It does not intercept Thing.TakeDamage, damage workers, fire, explosions,
-    /// weapon hits, or other direct damage systems.
+    /// Skips the periodic environmental deterioration routine.
+    /// This patch does not intercept general damage APIs such as Thing.TakeDamage.
     /// </summary>
-    [Static]
     internal static class StopEnvironmentalDeteriorationPatch
     {
         public static bool Prefix()
