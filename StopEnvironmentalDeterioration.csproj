@@ -8,30 +8,24 @@
     <OutputPath>1.7/Assemblies/</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <RimWorldManagedDir Condition="'$(RimWorldManagedDir)' == '' and '$(RIMWORLD_MANAGED)' != ''">$(RIMWORLD_MANAGED)</RimWorldManagedDir>
-    <RimWorldManagedDir Condition="'$(RimWorldManagedDir)' == ''">$(MSBuildProjectDirectory)\..\..\RimWorldWin64_Data\Managed</RimWorldManagedDir>
-    <HarmonyDllPath Condition="'$(HarmonyDllPath)' == '' and '$(HARMONY_DLL)' != ''">$(HARMONY_DLL)</HarmonyDllPath>
-    <HarmonyDllPath Condition="'$(HarmonyDllPath)' == ''">$(MSBuildProjectDirectory)\..\Harmony\Current\Assemblies\0Harmony.dll</HarmonyDllPath>
+    <GameRoot Condition="'$(GameRoot)' == ''">$(MSBuildProjectDirectory)\..\..</GameRoot>
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>$(RimWorldManagedDir)\Assembly-CSharp.dll</HintPath>
+      <HintPath>$(GameRoot)\Assembly-CSharp.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="0Harmony">
-      <HintPath>$(HarmonyDllPath)</HintPath>
+      <HintPath>$(GameRoot)\..\..\workshop\content\294100\2009463077\1.7\Assemblies\0Harmony.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
 
   <Target Name="ValidateRimWorldReferences" BeforeTargets="ResolveReferences">
-    <Error Condition="!Exists('$(RimWorldManagedDir)\Assembly-CSharp.dll')"
-           Text="Assembly-CSharp.dll not found. Set RIMWORLD_MANAGED to the RimWorld RimWorldWin64_Data\Managed directory. Current path: $(RimWorldManagedDir)" />
-    <Error Condition="!Exists('$(HarmonyDllPath)')"
-           Text="0Harmony.dll not found. Check Mods\Harmony\Current\Assemblies or set HARMONY_DLL. Current path: $(HarmonyDllPath)" />
+    <Error Condition="!Exists('$(GameRoot)\Assembly-CSharp.dll')"
+           Text="Assembly-CSharp.dll not found. Expected: $(GameRoot)\Assembly-CSharp.dll" />
+    <Error Condition="!Exists('$(GameRoot)\..\..\workshop\content\294100\2009463077\1.7\Assemblies\0Harmony.dll')"
+           Text="0Harmony.dll not found. Expected: $(GameRoot)\..\..\workshop\content\294100\2009463077\1.7\Assemblies\0Harmony.dll" />
   </Target>
 </Project>
