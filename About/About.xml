@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
   <name>Stop Environmental Deterioration</name>
   <author>Lilly</author>
@@ -19,4 +19,4 @@
     <li>brrainz.harmony</li>
   </loadAfter>
   <description>Completely disables environment-caused deterioration. Outdoor, unroofed and weather-related deterioration is stopped. Combat and other direct damage are unaffected.</description>
-</ModMetaData>
+<modVersion>1.0.0</modVersion></ModMetaData>
